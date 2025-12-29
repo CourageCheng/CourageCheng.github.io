@@ -1,0 +1,18 @@
+baseURL = "https://CourageCheng.github.io/"
+title = "Courage Cheng"
+theme = "PaperMod"
+languageCode = "zh-cn"
+
+[params]
+author = "Courage Cheng"
+ShowReadingTime = true
+ShowToc = true
+
+# 关键：关闭 Profile 首页
+[params.profileMode]
+enabled = false
+
+# 关键：首页显示 posts
+mainSections = ["posts"]
+enableMenu = true
+enableCategories = true
