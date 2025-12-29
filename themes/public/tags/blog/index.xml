@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Blog on Courage Cheng</title>
+    <link>https://CourageCheng.github.io/tags/blog/</link>
+    <description>Recent content in Blog on Courage Cheng</description>
+    <generator>Hugo -- 0.153.4</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Wed, 01 Jan 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://CourageCheng.github.io/tags/blog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>我的第一篇 Hugo 博客</title>
+      <link>https://CourageCheng.github.io/posts/test/</link>
+      <pubDate>Wed, 01 Jan 2025 00:00:00 +0000</pubDate>
+      <guid>https://CourageCheng.github.io/posts/test/</guid>
+      <description>&lt;p&gt;这是我使用 &lt;strong&gt;Obsidian + Hugo + GitHub Pages&lt;/strong&gt; 搭建的博客。&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
