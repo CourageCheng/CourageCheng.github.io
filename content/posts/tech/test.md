@@ -1,14 +1,14 @@
 ---
 title: "Test" #标题
-date: 2023-06-21T20:38:48+08:00 #创建时间
-lastmod: 2023-06-21T20:38:48+08:00 #更新时间
-author: ["Chenxu"] #作者
+date: 2025-12-29T20:38:48+08:00 #创建时间
+lastmod: 2025-12-29T20:38:48+08:00 #更新时间
+author: ["CourageCheng"] #作者
 categories: 
 - 分类1
 - 分类2
 tags: 
 - 学习
-- 学习
+- 技术
 description: "" #描述
 weight: # 输入1可以顶置文章，用来给文章展示排序，不填就默认按时间排序
 slug: ""
@@ -25,3 +25,5 @@ cover:
     alt: ""
     relative: false
 ---
+
+# 我的第一篇博客
