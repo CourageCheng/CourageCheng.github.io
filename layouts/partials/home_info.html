@@ -1,12 +1,12 @@
 {{- with $.Site.Params.homeInfoParams }}
-<article class="first-entry home-info">
-    <header class="entry-header">
-        <h1>{{ .Title | markdownify }}</h1>
+<article class="first-entry home-info" style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); border: 2px solid #667eea; border-radius: 16px; padding: 2.5rem; margin-bottom: 2rem; color: #2c3e50; box-shadow: 0 10px 30px rgba(102, 126, 234, 0.15);">
+    <header class="entry-header" style="margin-bottom: 1.5rem;">
+        <h1 style="color: #2c3e50; font-size: 2rem; margin: 0; font-weight: 700;">{{ .Title | markdownify }}</h1>
     </header>
-    <section class="entry-content">
-        <p>{{ .Content | markdownify }}</p>
+    <section class="entry-content" style="font-size: 1.1rem; line-height: 1.8; color: #555; margin-bottom: 1.5rem;">
+        <p style="margin: 0;">{{ .Content | markdownify }}</p>
     </section>
-    <footer class="entry-footer">
+    <footer class="entry-footer" style="margin-top: 1.5rem;">
         {{ partial "social_icons.html" $.Site.Params.socialIcons }}
     </footer>
 </article>

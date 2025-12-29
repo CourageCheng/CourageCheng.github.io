@@ -5,11 +5,11 @@
 {{- else }} {{/* if not profileMode */}}
 
 {{- if not .IsHome | and .Title }}
-<header class="page-header">
+<header class="page-header" style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); border: 2px solid #667eea; border-radius: 16px; padding: 2.5rem; margin-bottom: 2rem; color: #2c3e50; box-shadow: 0 10px 30px rgba(102, 126, 234, 0.15);">
   {{- partial "breadcrumbs.html" . }}
-  <h1>{{ .Title }}</h1>
+  <h1 style="color: #2c3e50; font-size: 2.5rem; margin: 1rem 0; font-weight: 700;">{{ .Title }}</h1>
   {{- if .Description }}
-  <div class="post-description">
+  <div class="post-description" style="color: #555; font-size: 1.1rem; line-height: 1.6;">
     {{ .Description | markdownify }}
   </div>
   {{- end }}
@@ -49,17 +49,17 @@
 {{- $class = "post-entry" }}
 {{- end }}
 
-<article class="{{ $class }}">
+<article class="{{ $class }}" style="background: #fff; border-radius: 12px; padding: 1.5rem; margin-bottom: 2rem; box-shadow: 0 2px 8px rgba(0,0,0,0.08); transition: all 0.3s ease; border: 1px solid #f0f0f0;">
   <div class="post-info">
     <header class="entry-header">
-      <h2>
+      <h2 style="margin: 0 0 0.75rem 0; font-size: 1.5rem; line-height: 1.4;">
         {{- .Title }}
         {{- if .Draft }}<sup><span class="entry-isdraft">&nbsp;&nbsp;[draft]</span></sup>{{- end }}
       </h2>
     </header>
     {{- if (ne (.Param "hideSummary") true) }}
-    <section class="entry-content">
-      <p>
+    <section class="entry-content" style="color: #666; line-height: 1.7; margin-bottom: 1rem;">
+      <p style="margin: 0;">
         {{- if .Description }}
         {{ .Description }}
         {{- end }}
@@ -69,15 +69,22 @@
     </section>
     {{- end }}
     {{- if not (.Param "hideMeta") }}
-    <footer class="entry-footer">
+    <footer class="entry-footer" style="color: #999; font-size: 0.9rem;">
       {{- partial "post_meta.html" . -}}
     </footer>
     {{- end }}
   </div>
   {{- $isHidden := (.Site.Params.cover.hidden | default .Site.Params.cover.hiddenInList) }}
   {{- partial "cover.html" (dict "cxt" . "IsHome" true "isHidden" $isHidden) }}
-  <a class="entry-link" aria-label="post link to {{ .Title | plainify }}" href="{{ .Permalink }}"></a>
+  <a class="entry-link" aria-label="post link to {{ .Title | plainify }}" href="{{ .Permalink }}" style="position: absolute; inset: 0; z-index: 1;"></a>
 </article>
+<style>
+article.post-entry:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  border-color: #e0e0e0;
+}
+</style>
 {{- end }}
 
 <br />

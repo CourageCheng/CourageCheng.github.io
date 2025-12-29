@@ -15,10 +15,29 @@
     {{- end }}
 </header>
 
-<div id="searchbox">
+<div id="searchbox" style="max-width: 800px; margin: 2rem auto;">
     <input id="searchInput" autofocus placeholder="{{ .Params.placeholder | default (printf " %s ↵" .Title) }}"
-    aria-label="search" type="search" autocomplete="off">
-    <ul id="searchResults" aria-label="search results"></ul>
+    aria-label="search" type="search" autocomplete="off" style="width: 100%; padding: 1rem 1.5rem; font-size: 1.1rem; border: 2px solid #e0e0e0; border-radius: 12px; outline: none; transition: all 0.3s ease; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+    <ul id="searchResults" aria-label="search results" style="list-style: none; padding: 0; margin-top: 1.5rem;"></ul>
 </div>
+<style>
+#searchInput:focus {
+  border-color: #667eea;
+  box-shadow: 0 4px 16px rgba(102, 126, 234, 0.2);
+}
+#searchResults li {
+  background: #fff;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  transition: all 0.3s ease;
+  border: 1px solid #f0f0f0;
+}
+#searchResults li:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+}
+</style>
 
 {{- end }}{{/* end main */}}

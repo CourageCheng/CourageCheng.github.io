@@ -2,3 +2,165 @@
 {{- /*     Insert any custom code web-analytics, resources, etc. here */ -}}
 {{- /* Footer custom content area end */ -}}
 
+<!-- 阅读进度条 -->
+<div id="reading-progress"></div>
+
+<!-- 返回顶部按钮 -->
+<button id="back-to-top" aria-label="返回顶部" title="返回顶部">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M18 15l-6-6-6 6"/>
+  </svg>
+</button>
+
+<script>
+// 阅读进度条
+(function() {
+  const progressBar = document.getElementById('reading-progress');
+  if (!progressBar) return;
+  
+  function updateProgress() {
+    const windowHeight = window.innerHeight;
+    const documentHeight = document.documentElement.scrollHeight;
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    const scrollPercent = (scrollTop / (documentHeight - windowHeight)) * 100;
+    progressBar.style.width = Math.min(scrollPercent, 100) + '%';
+  }
+  
+  let ticking = false;
+  window.addEventListener('scroll', function() {
+    if (!ticking) {
+      window.requestAnimationFrame(function() {
+        updateProgress();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  });
+  
+  updateProgress();
+})();
+
+// 返回顶部按钮
+(function() {
+  const backToTopButton = document.getElementById('back-to-top');
+  if (!backToTopButton) return;
+  
+  function toggleButton() {
+    if (window.pageYOffset > 300) {
+      backToTopButton.classList.add('show');
+    } else {
+      backToTopButton.classList.remove('show');
+    }
+  }
+  
+  window.addEventListener('scroll', toggleButton);
+  toggleButton();
+  
+  backToTopButton.addEventListener('click', function() {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  });
+})();
+
+// 图片懒加载增强（如果浏览器不支持原生懒加载）
+(function() {
+  if ('loading' in HTMLImageElement.prototype) {
+    // 浏览器支持原生懒加载
+    return;
+  }
+  
+  const images = document.querySelectorAll('img[loading="lazy"]');
+  const imageObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const img = entry.target;
+        if (img.dataset.src) {
+          img.src = img.dataset.src;
+          img.removeAttribute('data-src');
+        }
+        observer.unobserve(img);
+      }
+    });
+  });
+  
+  images.forEach(img => {
+    if (img.src) {
+      img.dataset.src = img.src;
+      img.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1 1"%3E%3C/svg%3E';
+    }
+    imageObserver.observe(img);
+  });
+})();
+
+// 点赞功能
+(function() {
+  const likeContainer = document.getElementById('like-container');
+  const likeIcon = document.getElementById('like-icon');
+  const likeCount = document.getElementById('like-count');
+  
+  if (!likeContainer || !likeIcon || !likeCount) return;
+  
+  // 获取当前页面路径作为唯一标识
+  const pagePath = window.location.pathname;
+  const storageKey = 'blog_like_' + pagePath.replace(/\//g, '_');
+  
+  // 从 localStorage 读取点赞状态和数量
+  let liked = localStorage.getItem(storageKey + '_liked') === 'true';
+  let count = parseInt(localStorage.getItem(storageKey + '_count') || '0');
+  
+  // 初始化显示
+  if (liked) {
+    likeIcon.style.color = '#f5576c';
+    likeIcon.classList.add('fa-heart');
+    likeIcon.classList.remove('fa-heart-o');
+  }
+  likeCount.textContent = count;
+  
+  // 点击事件
+  likeContainer.addEventListener('click', function() {
+    if (liked) {
+      // 取消点赞
+      liked = false;
+      count = Math.max(0, count - 1);
+      likeIcon.style.color = '#ccc';
+      likeIcon.style.transform = 'scale(0.9)';
+    } else {
+      // 点赞
+      liked = true;
+      count += 1;
+      likeIcon.style.color = '#f5576c';
+      likeIcon.style.transform = 'scale(1.2)';
+    }
+    
+    // 保存状态
+    localStorage.setItem(storageKey + '_liked', liked);
+    localStorage.setItem(storageKey + '_count', count);
+    
+    // 更新显示
+    likeCount.textContent = count;
+    
+    // 动画效果
+    setTimeout(() => {
+      likeIcon.style.transform = 'scale(1)';
+    }, 200);
+  });
+  
+  // 悬停效果
+  likeContainer.addEventListener('mouseenter', function() {
+    if (!liked) {
+      likeIcon.style.color = '#f5576c';
+      likeIcon.style.opacity = '0.7';
+    }
+  });
+  
+  likeContainer.addEventListener('mouseleave', function() {
+    if (!liked) {
+      likeIcon.style.color = '#ccc';
+      likeIcon.style.opacity = '1';
+    }
+  });
+})();
+</script>
+

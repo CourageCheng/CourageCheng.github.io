@@ -1,9 +1,9 @@
 {{- define "main" }}
 
-<header class="page-header">
-  <h1>{{ .Title }}</h1>
+<header class="page-header" style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); border: 2px solid #667eea; border-radius: 16px; padding: 2.5rem; margin-bottom: 2rem; color: #2c3e50; box-shadow: 0 10px 30px rgba(102, 126, 234, 0.15);">
+  <h1 style="color: #2c3e50; font-size: 2.5rem; margin: 0 0 1rem 0; font-weight: 700;">{{ .Title }}</h1>
   {{- if .Description }}
-  <div class="post-description">
+  <div class="post-description" style="color: #555; font-size: 1.1rem;">
     {{ .Description }}
   </div>
   {{- end }}
@@ -17,35 +17,43 @@
 
 {{- range $pages.GroupByPublishDate "2006" }}
 {{- if ne .Key "0001" }}
-<div class="archive-year">
-  <h2 class="archive-year-header">
-    {{- replace .Key "0001" "" }}年<sup class="archive-count">&nbsp;&nbsp;{{ len .Pages }}</sup>
+<div class="archive-year" style="background: #fff; border-radius: 12px; padding: 2rem; margin-bottom: 2rem; box-shadow: 0 2px 8px rgba(0,0,0,0.08); border-left: 4px solid #667eea;">
+  <h2 class="archive-year-header" style="font-size: 1.8rem; color: #2c3e50; margin: 0 0 1.5rem 0; padding-bottom: 1rem; border-bottom: 2px solid #f0f0f0;">
+    {{- replace .Key "0001" "" }}年<sup class="archive-count" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 0.2rem 0.6rem; border-radius: 12px; margin-left: 0.5rem; font-size: 0.9rem;">&nbsp;&nbsp;{{ len .Pages }}</sup>
   </h2>
   {{- $yearPages := .Pages.ByPublishDate.Reverse }}
   {{- range $yearPages.GroupByDate "2006-01" }}
-  <div class="archive-month">
-    <h3 class="archive-month-header">
+  <div class="archive-month" style="margin-bottom: 1.5rem; padding-left: 1rem; border-left: 2px solid #e0e0e0;">
+    <h3 class="archive-month-header" style="font-size: 1.3rem; color: #555; margin: 0 0 1rem 0; display: flex; align-items: center;">
       {{- $dateStr := .Key }}
       {{- $monthNum := int (substr $dateStr 5 2) }}
       {{- $monthNames := slice "1月" "2月" "3月" "4月" "5月" "6月" "7月" "8月" "9月" "10月" "11月" "12月" }}
       {{- index $monthNames (sub $monthNum 1) }}
-      <sup class="archive-count">&nbsp;&nbsp;{{ len .Pages }}
+      <sup class="archive-count" style="background: #f0f0f0; color: #666; padding: 0.15rem 0.5rem; border-radius: 10px; margin-left: 0.5rem; font-size: 0.85rem;">&nbsp;&nbsp;{{ len .Pages }}
       </sup>
     </h3>
-    <div class="archive-posts">
+    <div class="archive-posts" style="display: flex; flex-direction: column; gap: 0.75rem;">
       {{- $monthPages := .Pages.ByPublishDate.Reverse }}
       {{- range $monthPages }}
       {{- if eq .Kind "page" }}
-      <div class="archive-entry">
-        <h3 class="archive-entry-title">
+      <div class="archive-entry" style="background: #f8f9fa; border-radius: 8px; padding: 1rem 1.25rem; transition: all 0.3s ease; border: 1px solid #e9ecef; position: relative;">
+        <h3 class="archive-entry-title" style="margin: 0 0 0.5rem 0; font-size: 1.1rem; color: #2c3e50;">
           {{- .Title | markdownify }}
           {{- if .Draft }}<sup><span class="entry-isdraft">&nbsp;&nbsp;[draft]</span></sup>{{- end }}
         </h3>
-        <div class="archive-meta">
+        <div class="archive-meta" style="color: #999; font-size: 0.9rem;">
           {{- partial "post_meta.html" . -}}
         </div>
-        <a class="entry-link" aria-label="post link to {{ .Title | plainify }}" href="{{ .Permalink }}"></a>
+        <a class="entry-link" aria-label="post link to {{ .Title | plainify }}" href="{{ .Permalink }}" style="position: absolute; inset: 0; z-index: 1;"></a>
       </div>
+<style>
+.archive-entry:hover {
+  background: #fff;
+  transform: translateX(4px);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  border-color: #667eea;
+}
+</style>
       {{- end }}
       {{- end }}
     </div>

@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "template/new-note-template.md.md",
+                "file": "content/posts/tech/test.md",
                 "mode": "source",
                 "source": true
               },
               "icon": "lucide-file",
-              "title": "new-note-template.md"
+              "title": "test"
             }
           }
         ]
@@ -186,14 +186,30 @@
   },
   "active": "d6399147ea51f226",
   "lastOpenFiles": [
-    "content/posts/book/思考，快与慢.md",
+    "public/en/index.xml",
+    "public/en/index.json",
+    "public/index.html",
+    "public/en/search/index.html",
+    "public/en/search",
+    "public/en/about/index.html",
+    "public/en/about",
+    "public/en/links/index.html",
+    "public/en/links",
+    "public/en/tags/技术/page/1/index.html",
+    "public/en/tags/学习/page/1/index.html",
+    "public/img/wechat_pay.png",
+    "public/img/photo.jpg",
+    "public/img/phone.png",
+    "public/img/docker.png",
+    "public/img/beian.png",
+    "public/img/alipay.png",
     "template/new-note-template.md.md",
+    "content/posts/book/思考，快与慢.md",
     "content/posts/book/未命名 1.md",
     "template/hugo-post.md.md",
     "content/posts/life/未命名.md",
     "content/posts/未命名.md",
     "未命名.md",
-    "content/posts/tech/test.md",
-    "template"
+    "content/posts/tech/test.md"
   ]
 }

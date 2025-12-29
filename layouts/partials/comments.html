@@ -1,38 +1,40 @@
-<!-- {{- /* Comments area start */ -}}
-{{- /* to add comments read => https://gohugo.io/content-management/comments/ */ -}}
-{{- /* Comments area end */ -}}
- -->
-
-<!-- <style>
-    .comments_details summary::marker {
-        font-size: 20px;
-        content: '👉展开评论';
-        color: var(--content);
-    }
-    .comments_details[open] summary::marker{
-        font-size: 20px;
-        content: '👇关闭评论';
-        color: var(--content);
-    }
-</style> -->
-
-<!-- Twikoo -->
-<!-- <div>
-    <details class="comments_details">
-        <summary style="cursor: pointer; margin: 50px 0 20px 0;width: 130px;">
-            <span style="font-size: 20px;color: var(--content);">...</span>
-        </summary>
-        <div id="tcomment"></div>
-    </details>
-    <script src="https://cdn.staticfile.org/twikoo/{{ .Site.Params.twikoo.version }}/twikoo.all.min.js">
+{{- /* Comments area start */ -}}
+{{- if (.Param "comments") }}
+<div id="giscus-container" style="margin-top: 3rem; padding-top: 2rem; border-top: 2px solid #f0f0f0;">
+    <h3 style="font-size: 1.5rem; margin-bottom: 1.5rem; color: #2c3e50;">💬 评论</h3>
+    {{- if and .Site.Params.giscus.repo .Site.Params.giscus.repoId }}
+    <div id="giscus"></div>
+    <script src="https://giscus.app/client.js"
+            data-repo="{{ .Site.Params.giscus.repo }}"
+            data-repo-id="{{ .Site.Params.giscus.repoId }}"
+            data-category="{{ .Site.Params.giscus.category }}"
+            data-category-id="{{ .Site.Params.giscus.categoryId }}"
+            data-mapping="pathname"
+            data-strict="0"
+            data-reactions-enabled="1"
+            data-emit-metadata="0"
+            data-input-position="bottom"
+            data-theme="light"
+            data-lang="zh-CN"
+            crossorigin="anonymous"
+            async>
     </script>
     <script>
-        twikoo.init({
-            envId: {{ .Site.Params.twikoo.id }},
-        el: "#tcomment",
-            lang: 'zh-CN',
-            region: {{ .Site.Params.twikoo.region }},
-        path: window.TWIKOO_MAGIC_PATH||window.location.pathname,
-        })
+    // 更新评论数
+    window.addEventListener('message', function(event) {
+        if (event.origin !== 'https://giscus.app') return;
+        if (event.data.giscus && event.data.giscus.discussion) {
+            const commentCount = event.data.giscus.discussion.totalCommentCount || 0;
+            const commentCountEl = document.getElementById('comment_count');
+            if (commentCountEl) {
+                commentCountEl.textContent = commentCount;
+            }
+        }
+    });
     </script>
-</div> -->
+    {{- else }}
+    <p style="color: #999; text-align: center; padding: 2rem;">请在配置文件中设置 Giscus 评论系统</p>
+    {{- end }}
+</div>
+{{- end }}
+{{- /* Comments area end */ -}}

@@ -1,6 +1,6 @@
-<div class="profile">
+<div class="profile" style="margin-bottom: 2rem;">
     {{- with site.Params.profileMode }}
-    <div class="profile_inner">
+    <div class="profile_inner" style="background: #fff; border-radius: 16px; padding: 2.5rem; box-shadow: 0 4px 16px rgba(0,0,0,0.08); border: 1px solid #f0f0f0;">
         {{- if .imageUrl -}}
         {{- $img := "" }}
         {{- if not (urls.Parse .imageUrl).IsAbs }}
@@ -13,21 +13,13 @@
         {{- end -}}
         {{- $prod := (hugo.IsProduction | or (eq site.Params.env "production")) }}
         {{- if and (in $processableFormats $img.MediaType.SubType) (eq $prod true)}}
-        {{- if (not (and (not .imageHeight) (not .imageWidth))) }}
-        {{- $img = $img.Resize (printf "%dx%d" .imageWidth .imageHeight) }}
-        {{- else if .imageHeight }}
-        {{- $img = $img.Resize (printf "x%d" .imageHeight) }}
-        {{ else if .imageWidth }}
-        {{- $img = $img.Resize (printf "%dx" .imageWidth) }}
-        {{ else }}
-        {{- $img = $img.Resize "150x150" }}
-        {{- end }}
+        {{- $img = $img.Resize "80x80" }}
         {{- end }}
         <img draggable="false" src="{{ $img.Permalink }}" alt="{{ .imageTitle | default "profile image" }}" title="{{ .imageTitle }}"
-        height="{{ .imageHeight | default 150 }}" width="{{ .imageWidth | default 150 }}" />
+        class="profile-avatar" style="width: 80px !important; height: 80px !important; max-width: 80px !important; max-height: 80px !important; min-width: 80px !important; min-height: 80px !important; border-radius: 50% !important; object-fit: cover !important; display: block !important; margin: 0 auto !important;" />
         {{- else }}
         <img draggable="false" src="{{ .imageUrl | absURL }}" alt="{{ .imageTitle | default "profile image" }}" title="{{ .imageTitle }}"
-        height="{{ .imageHeight | default 150 }}" width="{{ .imageWidth | default 150 }}" />
+        class="profile-avatar" style="width: 80px !important; height: 80px !important; max-width: 80px !important; max-height: 80px !important; min-width: 80px !important; min-height: 80px !important; border-radius: 50% !important; object-fit: cover !important; display: block !important; margin: 0 auto !important;" />
         {{- end }}
         {{- end }}
         <h1>{{ .title | default site.Title | markdownify }}</h1>

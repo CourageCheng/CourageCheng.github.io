@@ -35,18 +35,18 @@ languages:
 
 profileMode:
   enabled: true
-  title: ｸﾞｯ!(๑•̀ㅂ•́)و✧
-  subtitle: "<br/>👏🏼欢迎光临我的博客<br/>"
+  title: "👋 你好，我是 CourageCheng"
+  subtitle: "<br/>💻 一个热爱生活、热爱技术的开发者<br/>📝 在这里分享技术、读书与生活<br/>"
   imageUrl: "img/photo.jpg"
-  imageTitle:
+  imageTitle: "CourageCheng"
   imageWidth: 150
   imageHeight: 150
   buttons:
-    - name: 技术分享
+    - name: 💡 技术分享
       url: posts/tech
-    - name: 读书分享
+    - name: 📚 读书分享
       url: posts/book
-    - name: 谈天说地
+    - name: 🌈 谈天说地
       url: posts/life
 
 menu:
@@ -89,7 +89,7 @@ outputs:
 params:
   env: production
   description: "谈谈技术, 聊聊书籍, 谈谈生活"
-  author: Chenxu
+  author: CourageCheng
   defaultTheme: auto
   disableThemeToggle: false
   DateFormat: "2006-01-02"
@@ -121,10 +121,20 @@ params:
     twitter: "" # Twitter 用户名（不需要 @ 符号）
     facebook_admin: "" # Facebook Page Admin ID
 
+  giscus:
+    repo: "" # GitHub 仓库，格式：username/repo
+    repoId: "" # Giscus 提供的 repo-id（访问 https://giscus.app 获取）
+    category: "" # 讨论分类名称
+    categoryId: "" # Giscus 提供的 category-id
+
+  homeInfoParams:
+    Title: "欢迎来到我的博客"
+    Content: "这里记录着我的技术学习、读书感悟和生活点滴。希望你能在这里找到有价值的内容，也欢迎与我交流讨论。"
+
   label:
     text: "CourageCheng's Blog"
     icon: "img/photo.jpg"
-    iconHeight: 35
+    iconHeight: 20
 
   analytics:
     google:
@@ -152,9 +162,6 @@ params:
     keys: ["title", "permalink", "summary"]
 
   StartYear: 2026
-  FilingNo: 填写自己的备案号
-  PublicSecurityIconLink: img/beian.png
-  PublicNetworkSecurity: 填自己的公网安备
 
   Reward: true
   WechatPay: "img/wechat_pay.png"
