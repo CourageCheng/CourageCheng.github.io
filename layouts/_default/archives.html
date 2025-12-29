@@ -9,9 +9,9 @@
   {{- end }}
 </header>
 
-{{- $pages := where site.RegularPages "Type" "in" site.Params.mainSections }}
+{{- $pages := where site.RegularPages "Type" "in" (site.Params.mainSections | default (slice "posts")) }}
 
-{{- if .Site.Params.ShowAllPagesInArchive }}
+{{- if site.Params.ShowAllPagesInArchive }}
 {{- $pages = site.RegularPages }}
 {{- end }}
 
@@ -21,51 +21,20 @@
   <h2 class="archive-year-header">
     {{- replace .Key "0001" "" }}年<sup class="archive-count">&nbsp;&nbsp;{{ len .Pages }}</sup>
   </h2>
-  {{- range .Pages.GroupByDate "January" }}
+  {{- $yearPages := .Pages.ByPublishDate.Reverse }}
+  {{- range $yearPages.GroupByDate "2006-01" }}
   <div class="archive-month">
     <h3 class="archive-month-header">
-      {{- if eq .Key "December" }}
-      {{ "12月" }}
-      {{- end }}
-      {{- if eq .Key "November" }}
-      {{ "11月" }}
-      {{- end }}
-      {{- if eq .Key "October" }}
-      {{ "10月" }}
-      {{- end }}
-      {{- if eq .Key "September" }}
-      {{ "9月" }}
-      {{- end }}
-      {{- if eq .Key "August" }}
-      {{ "8月" }}
-      {{- end }}
-      {{- if eq .Key "July" }}
-      {{ "7月" }}
-      {{- end }}
-      {{- if eq .Key "June" }}
-      {{ "6月" }}
-      {{- end }}
-      {{- if eq .Key "May" }}
-      {{ "5月" }}
-      {{- end }}
-      {{- if eq .Key "April" }}
-      {{ "4月" }}
-      {{- end }}
-      {{- if eq .Key "March" }}
-      {{ "3月" }}
-      {{- end }}
-      {{- if eq .Key "February" }}
-      {{ "2月" }}
-      {{- end }}
-      {{- if eq .Key "January" }}
-      {{ "1月" }}
-      {{- end }}
-      <!-- {{- .Key }} -->
+      {{- $dateStr := .Key }}
+      {{- $monthNum := int (substr $dateStr 5 2) }}
+      {{- $monthNames := slice "1月" "2月" "3月" "4月" "5月" "6月" "7月" "8月" "9月" "10月" "11月" "12月" }}
+      {{- index $monthNames (sub $monthNum 1) }}
       <sup class="archive-count">&nbsp;&nbsp;{{ len .Pages }}
       </sup>
     </h3>
     <div class="archive-posts">
-      {{- range .Pages }}
+      {{- $monthPages := .Pages.ByPublishDate.Reverse }}
+      {{- range $monthPages }}
       {{- if eq .Kind "page" }}
       <div class="archive-entry">
         <h3 class="archive-entry-title">

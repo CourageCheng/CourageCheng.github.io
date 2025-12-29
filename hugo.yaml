@@ -93,6 +93,8 @@ params:
   defaultTheme: auto
   disableThemeToggle: false
   DateFormat: "2006-01-02"
+  mainSections:
+    - posts
   ShowShareButtons: true
   ShowReadingTime: true
   displayFullLangName: true
