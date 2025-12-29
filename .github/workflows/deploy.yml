@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - master
+      - main
   workflow_dispatch:
 
 jobs:
@@ -17,9 +18,9 @@ jobs:
         with:
           fetch-depth: 0
 
-      # 2️⃣ 安装 Hugo（⚠️ 必须 extended）
+      # 2️⃣ 安装 Hugo（与你本地 v0.153.4 一致）
       - name: Setup Hugo
-        uses: peaceiris/actions-hugo@v4
+        uses: peaceiris/actions-hugo@v3
         with:
           hugo-version: '0.153.4'
           extended: true
@@ -36,4 +37,3 @@ jobs:
           publish_branch: master
           publish_dir: ./public
           keep_files: true
-
