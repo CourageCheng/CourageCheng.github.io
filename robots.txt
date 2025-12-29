@@ -1,0 +1,3 @@
+User-agent: *
+Disallow:
+Sitemap: https://CourageCheng.github.io/sitemap.xml
